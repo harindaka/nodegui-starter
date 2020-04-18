@@ -1,8 +1,11 @@
-import { QMainWindow, QWidget, QLabel, FlexLayout, QPushButton, QIcon } from '@nodegui/nodegui';
+import { QMainWindow, QWidget, QLabel, FlexLayout, QPushButton, QIcon, WindowState } from '@nodegui/nodegui';
 import logo from '../assets/logox200.png';
+import { styles } from './styles';
 
 const win = new QMainWindow();
 win.setWindowTitle("Hello World");
+//win.setFixedSize(500, 500);
+win.setWindowState(WindowState.WindowMaximized);
 
 const centralWidget = new QWidget();
 centralWidget.setObjectName("myroot");
@@ -15,6 +18,7 @@ label.setText("Hello");
 
 const button = new QPushButton();
 button.setIcon(new QIcon(logo));
+button.setText("Open");
 
 const label2 = new QLabel();
 label2.setText("World");
@@ -26,21 +30,7 @@ rootLayout.addWidget(label);
 rootLayout.addWidget(button);
 rootLayout.addWidget(label2);
 win.setCentralWidget(centralWidget);
-win.setStyleSheet(
-  `
-    #myroot {
-      background-color: #009688;
-      height: '100%';
-      align-items: 'center';
-      justify-content: 'center';
-    }
-    #mylabel {
-      font-size: 16px;
-      font-weight: bold;
-      padding: 1;
-    }
-  `
-);
+win.setStyleSheet(styles);
 win.show();
 
 (global as any).win = win;
